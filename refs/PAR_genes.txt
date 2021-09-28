@@ -1,0 +1,36 @@
+PAR	HGNC ID	Approved symbol	Approved name	Status	Locus type	Previous symbols	Alias symbols	Chromosome	NCBI Gene ID	Ensembl gene ID	Vega gene ID	Group ID	Group name
+PAR1	HGNC:18783	AKAP17A	A-kinase anchoring protein 17A	Approved	gene with protein product	CXYorf3, SFRS17A	XE7, XE7Y, DXYS155E, MGC39904, 721P, CCDC133	Xp22.33 and Yp11.32	8227	ENSG00000197976	OTTHUMG00000021063	715	Pseudoautosomal region 1
+PAR1	HGNC:750	ASMT	acetylserotonin O-methyltransferase	Approved	gene with protein product		HIOMT, ASMTY, HIOMTY	Xp22.3 and Yp11.3	438	ENSG00000196433	OTTHUMG00000021065	715	Pseudoautosomal region 1
+PAR1	HGNC:751	ASMTL	acetylserotonin O-methyltransferase like	Approved	gene with protein product			Xp22.3 and Yp11.3	8623	ENSG00000169093	OTTHUMG00000021057	715	Pseudoautosomal region 1
+PAR1	HGNC:25811	ASMTL-AS1	ASMTL antisense RNA 1	Approved	RNA, long non-coding	CXYorf2, NCRNA00105, ASMTLAS, ASMTL-AS	FLJ13330	Xp22.33 and Yp11.32	80161	ENSG00000236017	OTTHUMG00000021056	715	Pseudoautosomal region 1
+PAR1	HGNC:7082	CD99	CD99 molecule (Xg blood group)	Approved	gene with protein product	MIC2		Xp22.32 and Yp11.3	4267	ENSG00000002586	OTTHUMG00000021073	715	Pseudoautosomal region 1
+PAR1	HGNC:7083	CD99P1	CD99 molecule pseudogene 1	Approved	pseudogene	MIC2R, NCRNA00103, CXYorf12, CD99L1		Xp22.33 and Yp11.31	401577	ENSG00000223773	OTTHUMG00000021071	715	Pseudoautosomal region 1
+PAR1	HGNC:14281	CRLF2	cytokine receptor like factor 2	Approved	gene with protein product		CRL2, TSLPR	Xp22.3 and Yp11.3	64109	ENSG00000205755	OTTHUMG00000067432	715	Pseudoautosomal region 1
+PAR1	HGNC:2435	CSF2RA	colony stimulating factor 2 receptor subunit alpha	Approved	gene with protein product	CSF2R	CD116, alphaGMR	Xp22.32 and Yp11.3	1438	ENSG00000198223	OTTHUMG00000012533	715	Pseudoautosomal region 1
+PAR1	HGNC:18399	DHRSX	dehydrogenase/reductase X-linked	Approved	gene with protein product		DHRS5X, DHRSXY, DHRSY, DHRS5Y, SDR46C1, SDR7C6	Xp22.33 and Yp11.2	207063	ENSG00000169084	OTTHUMG00000021068	715	Pseudoautosomal region 1
+PAR1	HGNC:38713	DHRSX-IT1	DHRSX intronic transcript 1	Approved	RNA, long non-coding	DHRSXIT1	DHRSX-IT	Xp22.33 and Yp11	106478924	ENSG00000223571	OTTHUMG00000067406	715	Pseudoautosomal region 1
+PAR1	HGNC:38717	FABP5P13	fatty acid binding protein 5 pseudogene 13	Approved	pseudogene	FABP5L13		Xp22.33 and Yp11.32	106480712	ENSG00000234958	OTTHUMG00000021050	715	Pseudoautosomal region 1
+PAR1	HGNC:30189	GTPBP6	GTP binding protein 6 (putative)	Approved	gene with protein product		PGPL, FLJ20977	Xp22.33 and Yp11.32	8225	ENSG00000178605	OTTHUMG00000022694	715	Pseudoautosomal region 1
+PAR1	HGNC:6012	IL3RA	interleukin 3 receptor subunit alpha	Approved	gene with protein product		CD123	Xp22.3 and Yp13.3	3563	ENSG00000185291	OTTHUMG00000021059	715	Pseudoautosomal region 1
+PAR1	HGNC:30470	LINC00102	long intergenic non-protein coding RNA 102	Approved	RNA, long non-coding	NCRNA00102	OTTHUMT00000055623	Xp22.33 and Yp11.31	100359394	ENSG00000230542	OTTHUMG00000021072	715	Pseudoautosomal region 1
+PAR1	HGNC:31843	LINC00106	long intergenic non-protein coding RNA 106	Approved	RNA, long non-coding	CXYorf8, NCRNA00106	OTTHUMG00000021061	Xp22.33 and Yp11.32	751580	ENSG00000236871	OTTHUMG00000021061	715	Pseudoautosomal region 1
+PAR1	HGNC:27560	LINC00685	long intergenic non-protein coding RNA 685	Approved	RNA, long non-coding	CXYorf10, NCRNA00107, PPP2R3B-AS1	OTTHUMT00000055574	Xp22.33 and Yp11.32	283981	ENSG00000226179	OTTHUMG00000021049	715	Pseudoautosomal region 1
+PAR1	HGNC:38967	MIR3690	microRNA 3690	Approved	RNA, micro	MIR3690-2, MIR3690-1	hsa-mir-3690, hsa-mir-3690-2	Xp22.32 and Yp11.3	100500894	ENSG00000265658		715	Pseudoautosomal region 1
+PAR1	HGNC:50179	MIR6089	microRNA 6089	Approved	RNA, micro	MIR6089-1, MIR6089-2	hsa-mir-6089-1	Xp22.3 and Yp11.3	102464837	ENSG00000277120		715	Pseudoautosomal region 1
+PAR1	HGNC:23148	PLCXD1	phosphatidylinositol specific phospholipase C X domain containing 1	Approved	gene with protein product		FLJ11323	Xp22.33 and Yp11.32	55344	ENSG00000182378	OTTHUMG00000022693	715	Pseudoautosomal region 1
+PAR1	HGNC:13417	PPP2R3B	protein phosphatase 2 regulatory subunit B''beta	Approved	gene with protein product	PPP2R3L	PPP2R3LY, PR48, PR70	Xp22.3 and Yp11.3	28227	ENSG00000167393	OTTHUMG00000021052	715	Pseudoautosomal region 1
+PAR1	HGNC:15524	P2RY8	P2Y receptor family member 8	Approved	gene with protein product		P2Y8	Xp22.33 and Yp11.3	286530	ENSG00000182162	OTTHUMG00000021060	715	Pseudoautosomal region 1
+PAR1	HGNC:10853	SHOX	short stature homeobox	Approved	gene with protein product		PHOG, GCFX, SS, SHOXY	Xp22.33 and Yp11.32	6473	ENSG00000185960	OTTHUMG00000021053	715	Pseudoautosomal region 1
+PAR1	HGNC:10992	SLC25A6	solute carrier family 25 member 6	Approved	gene with protein product	ANT3	ANT3Y, MGC17525	Xp22.32 and Yp11.3	293	ENSG00000169100	OTTHUMG00000021058	715	Pseudoautosomal region 1
+PAR1	HGNC:12806	XG	Xg glycoprotein (Xg blood group)	Approved	gene with protein product	PBDX		Xp22.33	7499	ENSG00000124343	OTTHUMG00000021075	715	Pseudoautosomal region 1
+PAR1	HGNC:447	ZBED1	zinc finger BED-type containing 1	Approved	gene with protein product	ALTE	TRAMP, KIAA0785, DREF, hDREF	Xp22.33 and Yp11	9189	ENSG00000214717	OTTHUMG00000021069	715	Pseudoautosomal region 1
+PAR2	HGNC:460	AMD1P2	adenosylmethionine decarboxylase 1 pseudogene 2	Approved	pseudogene	AMD2, AMD, AMDP1	AMDPX, AMDPY	Xq28 and Yq12	263	ENSG00000237801	OTTHUMG00000022673	716	Pseudoautosomal region 2
+PAR2	HGNC:37115	DDX11L16	DEAD/H-box helicase 11 like 16 (pseudogene)	Approved	pseudogene			Xq28 and Yq12	727856	ENSG00000227159	OTTHUMG00000022678	716	Pseudoautosomal region 2
+PAR2	HGNC:38719	DPH3P2	diphthamide biosynthesis 3 pseudogene 2	Approved	pseudogene			Xq28 and Yq12	106478926	ENSG00000237040	OTTHUMG00000022680	716	Pseudoautosomal region 2
+PAR2	HGNC:6030	IL9R	interleukin 9 receptor	Approved	gene with protein product		CD129	Xq28 and Yq12	3581	ENSG00000124334	OTTHUMG00000022720	716	Pseudoautosomal region 2
+PAR2	HGNC:11271	SPRY3	sprouty RTK signaling antagonist 3	Approved	gene with protein product		HSPRY3	Xq28 and Yq12	10251	ENSG00000168939	OTTHUMG00000022675	716	Pseudoautosomal region 2
+PAR2	HGNC:38160	ELOCP24	elongin C pseudogene 24	Approved	pseudogene	TCEB1P25, TCEB1P24		Xq28 and Yq12	100287692	ENSG00000228410	OTTHUMG00000040493	716	Pseudoautosomal region 2
+PAR2	HGNC:23270	TRPC6P	transient receptor potential cation channel subfamily C member 6, pseudogene	Approved	pseudogene		TRPC6L	Xq28 and Yq12	644218	ENSG00000223484	OTTHUMG00000022681	716	Pseudoautosomal region 2
+PAR2	HGNC:11486	VAMP7	vesicle associated membrane protein 7	Approved	gene with protein product	SYBL1	VAMP-7, TI-VAMP	Xq28 and Yq12	6845	ENSG00000124333	OTTHUMG00000022679	716	Pseudoautosomal region 2
+PAR2	HGNC:31685	WASH6P	WASP family homolog 6, pseudogene	Approved	pseudogene	FAM39A, CXYorf1		Xq28 and Yq12	653440	ENSG00000182484	OTTHUMG00000022677	716	Pseudoautosomal region 2
+PAR2	HGNC:38513	WASIR1	WASH and IL9R antisense RNA 1	Approved	RNA, long non-coding	NCRNA00286B		Xq28 and Yq12	100128260	ENSG00000185203	OTTHUMG00000022676	716	Pseudoautosomal region 2
