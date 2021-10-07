@@ -1,21 +1,23 @@
 
+message("\n## Setting up working environment...\n")
+
 ################################
 ###     load R libraries     ###
 ################################
 
-require("Seurat")
-require("SingleR")
-require("AnnotationHub")
-require("SingleCellExperiment")
-require("data.table")
-require("Matrix")
-require("dplyr")
+library("Seurat", quietly=T)
+library("SingleR", quietly=T)
+library("AnnotationHub", quietly=T)
+library("SingleCellExperiment", quietly=T)
+library("data.table", quietly=T)
+library("Matrix", quietly=T)
+library("dplyr", quietly=T)
 
 ################################
 ###  environmental variables ###
 ################################
 
-seed <- 123
+seed <- 42
 set.seed(seed)
 options(width=220)
 options(scipen=5)
@@ -41,7 +43,7 @@ par_genes <- read.csv(paste(wpath, refdata, "PAR_genes.txt", sep="/"), sep="\t",
 monaco <- readRDS(paste(wpath, refdata, "singleR.MonacoImmuneData.rds", sep="/"))
 
 ################################
-###     custom functions     ###
+###  load custom functions   ###
 ################################
 
 source("helper_functions.R")
@@ -49,6 +51,8 @@ source("helper_functions.R")
 ################################
 ###   load CellRanger data   ###
 ################################
+
+message("\n## Processing raw data...\n")
 
 if (file.exists(paste(wpath, "pbmc.raw.rds", sep="/"))) {
 	pbmc.raw <- readRDS(paste(wpath, "pbmc.raw.rds", sep="/"))
@@ -64,6 +68,8 @@ if (file.exists(paste(wpath, "pbmc.raw.rds", sep="/"))) {
 ###    output some stats     ###
 ################################
 
+message("\n## Calculating some basic statistics...\n")
+
 pbmc.raw.stats <- get_stats_with_dens(pbmc.raw)
 
 mito.genes <- subset(gene.annotation.GFF, V1 == "chrM")$symbol
@@ -74,6 +80,8 @@ print(apply(pbmc.raw.stats[,c(2:3,6)], 2, summary))
 ################################
 ###     quality control      ###
 ################################
+
+message("\n## Performing quality control...\n")
 
 maxdims <- 20
 mingenes <- 500; maxgenes <- 5000
@@ -99,10 +107,12 @@ print(filteroutgenes)
 ###   create Seurat object   ###
 ################################
 
+message("\n## Generating Seurat object...\n")
+
 if (file.exists(paste(wpath, "pbmc.rds", sep="/"))) {
 	pbmc <- readRDS(paste(wpath, "pbmc.rds", sep="/"))
 } else {
-	pbmc <- CreateSeuratObject(counts = pbmc.raw, project="45,X/48,XYYY")
+	pbmc <- CreateSeuratObject(counts = pbmc.raw, project = "45,X/48,XYYY")
 	pbmc[["percent.mt"]] <- PercentageFeatureSet(pbmc, pattern = "^MT-")
 	pbmc[["percent.ribo"]] <- PercentageFeatureSet(pbmc, pattern = "^RP[SL]")
 	pbmc[["percent.y"]] <- PercentageFeatureSet(pbmc, features = intersect(rownames(pbmc), subset(gene.annotation.GFF, V1=="chrY")$symbol))
@@ -132,10 +142,11 @@ if (file.exists(paste(wpath, "pbmc.rds", sep="/"))) {
 	pbmc <- FindNeighbors(pbmc, dims = 1:maxdims)
 	pbmc <- FindClusters(pbmc, resolution=c(1.0, 0.8, 0.6, 0.4, 0.2))
 
+	pbmc$seurat_clusters <- pbmc$RNA_snn_res.0.6
+
 	saveRDS(pbmc, paste(wpath, "pbmc.rds", sep="/"))
 }
 
-pbmc$seurat_clusters <- pbmc$RNA_snn_res.0.6
 apply(pbmc@meta.data[,c(2:7)], 2, summary)
 
 pbmc.cluster_stats <- get_cluster_stats(pbmc)
@@ -145,32 +156,41 @@ print(pbmc.cluster_stats)
 ###    assign cell labels    ###
 ################################
 
-Idents(pbmc) <- pbmc$seurat_clusters
-sce.pbmc <- as.SingleCellExperiment(pbmc)
+message("\n## Assigning cell labels...\n")
 
-pred.monaco <- SingleR(test=sce.pbmc, ref=monaco, assay.type.test=1, labels=monaco$label.main)
-pred.monaco2 <- SingleR(test=sce.pbmc, ref=monaco, assay.type.test=1, labels=monaco$label.fine)
-celllabels <- cbind("cell_type.monaco"=pred.monaco$labels, "cell_type.monacoF"=pred.monaco2$labels)
-rownames(celllabels) <- rownames(pred.monaco)
+if (!"cell_type.monaco" %in% colnames(pbmc)) {
+	Idents(pbmc) <- pbmc$seurat_clusters
+	sce.pbmc <- as.SingleCellExperiment(pbmc)
 
-pbmc <- AddMetaData(pbmc, as.data.frame(celllabels))
-#table(pbmc$cell_type.monaco, pbmc$seurat_clusters)
-#table(pbmc$cell_type.monacoF, pbmc$seurat_clusters)
-#table(pbmc$cell_type.monacoF, pbmc$cell_type.monaco)
+	pred.monaco <- SingleR(test=sce.pbmc, ref=monaco, assay.type.test=1, labels=monaco$label.main)
+	pred.monaco2 <- SingleR(test=sce.pbmc, ref=monaco, assay.type.test=1, labels=monaco$label.fine)
+	celllabels <- cbind("cell_type.monaco"=pred.monaco$labels, "cell_type.monacoF"=pred.monaco2$labels)
+	rownames(celllabels) <- rownames(pred.monaco)
 
-new_labels <- list("0"="Monocytes", "1"="CD4+ T cells", "2"="CD4+ T cells", "3"="CD8+ T cells", "4"="B cells", "5"="TFH/TREG",
-									 "6"="Natural killer", "7"="VN42 T cells", "8"="B cells", "9"="Monocytes", "10"="Megakaryocyte progenitors", "11"="NA")
-pbmc$new_labels <- unlist(new_labels[pbmc$seurat_clusters], use.names=F)
-pbmc$new_labels2 <- pbmc$new_labels
-pbmc$new_labels2[pbmc$seurat_clusters=="4"] <- "B cells (clust_4)"
-pbmc$new_labels2[pbmc$seurat_clusters=="8"] <- "B cells (clust_8)"
-pbmc$new_labels2[pbmc$seurat_clusters=="0"] <- "Monocytes (clust_0)"
-pbmc$new_labels2[pbmc$seurat_clusters=="9"] <- "Monocytes (clust_9)"
+	pbmc <- AddMetaData(pbmc, as.data.frame(celllabels))
+	#table(pbmc$cell_type.monaco, pbmc$seurat_clusters)
+	#table(pbmc$cell_type.monacoF, pbmc$seurat_clusters)
+	#table(pbmc$cell_type.monacoF, pbmc$cell_type.monaco)
+
+	new_labels <- list("0"="Monocytes", "1"="CD4+ T cells", "2"="CD4+ T cells", "3"="CD8+ T cells",
+			"4"="B cells", "5"="TFH/TREG", "6"="Natural killer", "7"="Vδ2 T cells", "8"="B cells",
+			"9"="Monocytes", "10"="Megakaryocyte progenitors", "11"="NA")
+
+	pbmc$new_labels <- unlist(new_labels[pbmc$seurat_clusters], use.names=F)
+	pbmc$new_labels2 <- pbmc$new_labels
+	pbmc$new_labels2[pbmc$seurat_clusters=="4"] <- "B cells (clust_4)"
+	pbmc$new_labels2[pbmc$seurat_clusters=="8"] <- "B cells (clust_8)"
+	pbmc$new_labels2[pbmc$seurat_clusters=="0"] <- "Monocytes (clust_0)"
+	pbmc$new_labels2[pbmc$seurat_clusters=="9"] <- "Monocytes (clust_9)"
+}
+
 print(table(pbmc$new_labels, pbmc$seurat_clusters, dnn=c("cell.type:","cluster:")))
 
 ################################
 ### sex chromosomes content  ###
 ################################
+
+message("\n## Calculating sex chromosome statistics and defining cell karyotypes...\n")
 
 y_genes <- intersect(rownames(pbmc), subset(gene.annotation.GFF, V1=="chrY")$symbol)
 y_genes.raw <- intersect(rownames(pbmc.raw), subset(gene.annotation.GFF, V1=="chrY")$symbol)
@@ -206,8 +226,17 @@ print(mos.stats)
 ### differential expression  ###
 ################################
 
+message("\n## Running differential expression analyses...\n")
+
 #pbmc.de <- get_DEGs_for_karyo(pbmc, "new_labels", lfc=0.2, alpha=0.05)
 pbmc.de <- get_DEGs_for_karyo(pbmc, "new_labels2", lfc=0.2, alpha=0.05) ## final DEG set
 print(pbmc.de)
 
+################################
+### save the final R object  ###
+################################
+
+saveRDS(pbmc, paste(wpath, "pbmc.rds", sep="/"))
+
+message("\n## All done!\n")
 
